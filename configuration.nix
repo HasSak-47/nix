@@ -61,24 +61,37 @@
     extraGroups = [ "networkmanager" "wheel" "video"];
   };
 
-  home-manager.users.lilith = import ./lilith.nix;
+  users.users.adam = {
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" "video"];
+  };
 
+  home-manager.users.lilith = import ./lilith.nix;
+  home-manager.users.adam = import ./adam.nix;
+
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     wireplumber.enable = true;
     pulse.enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     jack.enable = true;
+    audio.enable = true;
   };
 
   services.displayManager = {
     enable = true;
-    autoLogin.user = "lilith";
-    autoLogin.enable = true;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
   };
 
+  systemd.watchdog.runtimeTime = "0s";
+
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
