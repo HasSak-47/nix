@@ -4,19 +4,8 @@
   home.username = "lilith";
   home.stateVersion = "24.05";
 
-  # man I hate fish
-  programs.bash = {
+  programs.nushell = {
     enable = true;
-    initExtra = ''
-        fish
-    '';
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting 
-    '';
   };
 
   programs.kitty = {
@@ -32,7 +21,7 @@
   home.packages = with pkgs; [
     # utils
     w3m
-    fish
+    nushell
     kitty
     zip
     bat
@@ -44,12 +33,15 @@
     python3
     gcc
     go
+    typescript
+    pyright
 
     # tools
     rust-analyzer
     clang-tools
     valgrind
     vscode-extensions.sumneko.lua
+    sccache
     nixd
 
     #wirebar
@@ -57,14 +49,18 @@
     wireplumber
     helvum
     pulseaudio
+
+    #looks sick af
+    onefetch
   ];
+
 
   home.keyboard.layout  = "la-latin1";
   home.keyboard.options = ["la-latin1"];
 
   programs.waybar = {
     enable = true;
-  systemd = {
+    systemd = {
     enable = true;
   };
   settings = {

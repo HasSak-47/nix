@@ -111,7 +111,7 @@
     wget
     git
     firefox
-    fish
+    nushell
     zip
     unzip
   ];
@@ -119,6 +119,7 @@
   fonts.packages = with pkgs; [
      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
+  users.users.lilith.shell = pkgs.nushell;
 
   programs.sway = {
     enable = true;
@@ -143,7 +144,9 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

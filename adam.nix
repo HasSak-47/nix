@@ -45,7 +45,7 @@
     pulseaudio
     
     #gaeming boys
-    # steam
+    steam
   ];
 
   home.keyboard.layout  = "la-latin1";
