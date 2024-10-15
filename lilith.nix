@@ -24,6 +24,7 @@
     nushell
     kitty
     zip
+    spectacle
     bat
 
     # compile/runtime
@@ -34,7 +35,6 @@
     gcc
     go
     typescript
-    pyright
 
     # tools
     rust-analyzer
@@ -42,7 +42,9 @@
     valgrind
     vscode-extensions.sumneko.lua
     sccache
+    pyright
     nixd
+    zig
 
     #wirebar
     pipewire
@@ -50,10 +52,12 @@
     helvum
     pulseaudio
 
-    #looks sick af
+    # git neofetch that looks sick af
     onefetch
-  ];
 
+    kdePackages.breeze-gtk
+    kdePackages.breeze
+  ];
 
   home.keyboard.layout  = "la-latin1";
   home.keyboard.options = ["la-latin1"];
@@ -61,17 +65,20 @@
   programs.waybar = {
     enable = true;
     systemd = {
-    enable = true;
-  };
-  settings = {
-    mainBar = {
-      modules-right  = ["wireplumber" "backlight" "cpu" "memory" "network" "clock"];
-      modules-left   = ["sway/workspaces" "sway/mode"];
-      modules-center = [];
+      enable = true;
+    };
+    settings = {
+      mainBar = {
+        modules-right  = ["wireplumber" "backlight" "cpu" "memory" "network" "clock"];
+        modules-left   = ["sway/workspaces" "sway/mode"];
+        modules-center = [];
+      };
     };
   };
-  };
 
+  programs.ssh.enable = true;
+  services.ssh-agent.enable = true;
+  systemd.user.startServices = "sd-switch";
 
   wayland.windowManager.sway = {
     systemd.enable = true;

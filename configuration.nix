@@ -1,7 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -80,16 +79,6 @@
     audio.enable = true;
   };
 
-  services.displayManager = {
-    enable = true;
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-  };
-
-  systemd.watchdog.runtimeTime = "0s";
-
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
 
@@ -105,8 +94,10 @@
     #term
     kitty
 
+
     # global utils
     neovim
+    ssh-agents
     vim
     wget
     git
@@ -132,21 +123,21 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
   };
+  services.displayManager = {
+    enable = true;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
+
+  systemd.watchdog.runtimeTime = "0s";
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
