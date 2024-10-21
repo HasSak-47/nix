@@ -26,6 +26,7 @@
     zip
     spectacle
     bat
+    cloc
 
     # compile/runtime
     gnumake
@@ -46,6 +47,10 @@
     nixd
     zig
 
+    #man
+    man-pages
+    man-pages-posix
+
     #wirebar
     pipewire
     wireplumber
@@ -57,6 +62,7 @@
 
     kdePackages.breeze-gtk
     kdePackages.breeze
+
   ];
 
   home.keyboard.layout  = "la-latin1";

@@ -107,6 +107,8 @@
     unzip
   ];
 
+  documentation.dev.enable = true;
+
   fonts.packages = with pkgs; [
      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
@@ -152,5 +154,12 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
+  hardware.opengl = {
+    driSupport = true;
+    driSupport32Bit = true;
 
+    ## amdvlk: an open-source Vulkan driver from AMD
+    extraPackages = [ pkgs.amdvlk ];
+    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+  };
 }

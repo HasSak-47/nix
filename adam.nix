@@ -48,6 +48,9 @@
     steam
   ];
 
+  programs.ssh.enable = true;
+  services.ssh-agent.enable = true;
+
   home.keyboard.layout  = "la-latin1";
   home.keyboard.options = ["la-latin1"];
 
