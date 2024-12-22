@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -13,6 +12,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,13 +51,16 @@
   # Configure console keymap
   console.keyMap = "pl2";
 
+  #allow non free pkgs
+  nixpkgs.config.allowUnfree = true;
+
   # home manager stuff
   security.polkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lilith = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "video"];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker"];
   };
 
   users.users.adam = {
@@ -67,6 +70,14 @@
 
   home-manager.users.lilith = import ./lilith.nix;
   home-manager.users.adam = import ./adam.nix;
+
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -96,7 +107,6 @@
 
 
     # global utils
-    neovim
     ssh-agents
     vim
     wget
@@ -112,6 +122,7 @@
   fonts.packages = with pkgs; [
      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
+
   users.users.lilith.shell = pkgs.nushell;
 
   programs.sway = {
@@ -154,8 +165,9 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  # shit to make steam work
   hardware.opengl = {
-    driSupport = true;
     driSupport32Bit = true;
 
     ## amdvlk: an open-source Vulkan driver from AMD

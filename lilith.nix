@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
+
 {
+  #allow non free pkgs
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" ];
+
   home.homeDirectory = "/home/lilith";
   home.username = "lilith";
   home.stateVersion = "24.05";
@@ -18,6 +23,7 @@
     extraConfig = "background_opacity 0.8";
   };
 
+
   home.packages = with pkgs; [
     # utils
     w3m
@@ -27,6 +33,8 @@
     spectacle
     bat
     cloc
+    tmux
+    tree
 
     # compile/runtime
     gnumake
@@ -38,14 +46,29 @@
     typescript
 
     # tools
+    neovim
     rust-analyzer
     clang-tools
     valgrind
-    vscode-extensions.sumneko.lua
     sccache
     pyright
     nixd
     zig
+    tree-sitter
+    glfw
+    docker
+    podman
+    docker-compose
+    podman-compose
+    dive
+
+
+    #hate lsp
+    vscode-langservers-extracted
+    # nodePackages.vscode-html-languageserver-bin
+    # nodePackages.vscode-css-languageserver-bin
+    # nodePackages.coc-sumneko-lua
+    # nodePackages.typescript-language-server
 
     #man
     man-pages
@@ -63,6 +86,9 @@
     kdePackages.breeze-gtk
     kdePackages.breeze
 
+    #temp while daniel is dead
+    obsidian
+    obs-studio
   ];
 
   home.keyboard.layout  = "la-latin1";
